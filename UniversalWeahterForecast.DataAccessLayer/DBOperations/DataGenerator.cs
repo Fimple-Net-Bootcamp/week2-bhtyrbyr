@@ -50,12 +50,12 @@ namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
                     );
 
                 context.WeatherTypes.AddRange(
-                        new WeatherTypes { Name = "Güneşli" },
-                        new WeatherTypes { Name = "Parçalı Bulutlu" },
-                        new WeatherTypes { Name = "Kapalı" },
-                        new WeatherTypes { Name = "Yağışlı" },
-                        new WeatherTypes { Name = "Sağnak Yağışlı" },
-                        new WeatherTypes { Name = "Fırtına" }
+                        new WeatherType { Name = "Güneşli" },
+                        new WeatherType { Name = "Parçalı Bulutlu" },
+                        new WeatherType { Name = "Kapalı" },
+                        new WeatherType { Name = "Yağışlı" },
+                        new WeatherType { Name = "Sağnak Yağışlı" },
+                        new WeatherType { Name = "Fırtına" }
                     );
                 context.WeatherForecasts.AddRange(
                         new WeatherForecast { CelestialBodyId = 1, WeatherTypeId = rnd.Next(1, 7), Temprature = rnd.Next(5, 30), WeatherTime = DateTime.Now },

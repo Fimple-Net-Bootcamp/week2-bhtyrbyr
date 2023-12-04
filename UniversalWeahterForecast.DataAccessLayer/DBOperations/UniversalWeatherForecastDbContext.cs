@@ -15,7 +15,8 @@ namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
 
         public DbSet<CelestalBody> CelestalBodies { get; set; }
         public DbSet<WeatherForecast> WeatherForecasts { get; set; }
-        public DbSet<WeatherTypes> WeatherTypes { get; set; }
+        public DbSet<WeatherType> WeatherTypes { get; set; }
+
 
         public override int SaveChanges()
         {
