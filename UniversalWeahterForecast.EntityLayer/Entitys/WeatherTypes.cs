@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace UniversalWeahterForecast.EntityLayer.Entitys
 {
-    internal enum WeatherTypes
+    public class WeatherTypes
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string? Name { get; set; }
     }
 }
