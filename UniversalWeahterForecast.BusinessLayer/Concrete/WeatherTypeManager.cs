@@ -9,7 +9,7 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
-    internal class WeatherTypeManager : IWeatherTypeService
+    public class WeatherTypeManager : IWeatherTypeService
     {
         private readonly IWeatherTypeDal _dal;
 

@@ -1,21 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
+using UniversalWeahterForecast.BusinessLayer.Abstract;
 
 namespace UniversalWeahterForecast.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]s")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private readonly IWeatherForecastService _service;
+        public WeatherForecastController(IWeatherForecastService service)
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+            _service = service;
+        }
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        [HttpGet("")]
+        public IActionResult Get()
         {
-            _logger = logger;
+            var values = _service.TGetList();
+            return Ok(values);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var values = _service.TGetByID(id);
+            return Ok(values);
         }
     }
 }

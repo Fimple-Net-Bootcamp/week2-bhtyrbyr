@@ -10,7 +10,7 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
-    internal class CelestalBodyManager : ICelestalBodyService
+    public class CelestalBodyManager : ICelestalBodyService
     {
         private readonly ICelestalBodyDal _dal;
 
