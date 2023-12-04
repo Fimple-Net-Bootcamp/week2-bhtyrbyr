@@ -10,7 +10,7 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.DataAccessLayer.EntityFramework
 {
-    internal class EfWeatherTypeDal : GenericRepository<WeatherType>, IWeatherTypeDal
+    public class EfWeatherTypeDal : GenericRepository<WeatherType>, IWeatherTypeDal
     {
         public EfWeatherTypeDal(UniversalWeatherForecastDbContext context) : base(context)
         {

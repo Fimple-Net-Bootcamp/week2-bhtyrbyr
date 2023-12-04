@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelProject.DataAccessLayer.Abstract
-{
+namespace UniversalWeahterForecast.DataAccessLayer.Abstract
+{ 
     public interface IGenericDal<T> where T : class
     {
         void Insert(T t);

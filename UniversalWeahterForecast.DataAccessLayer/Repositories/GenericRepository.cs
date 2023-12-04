@@ -1,9 +1,9 @@
-﻿using HotelProject.DataAccessLayer.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniversalWeahterForecast.DataAccessLayer.Abstract;
 using UniversalWeahterForecast.DataAccessLayer.DBOperations;
 
 namespace UniversalWeahterForecast.DataAccessLayer.Repositories

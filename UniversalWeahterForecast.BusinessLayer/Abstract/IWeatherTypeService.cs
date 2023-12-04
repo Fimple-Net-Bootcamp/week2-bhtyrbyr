@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 
-namespace UniversalWeahterForecast.DataAccessLayer.Abstract
+namespace UniversalWeahterForecast.BusinessLayer.Abstract
 {
-    public interface IWeatherTypeDal : IGenericDal<WeatherType>
+    public interface IWeatherTypeService : IGenericService<WeatherType>
     {
     }
 }

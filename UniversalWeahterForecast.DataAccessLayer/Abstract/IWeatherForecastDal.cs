@@ -1,5 +1,4 @@
-﻿using HotelProject.DataAccessLayer.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +7,7 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.DataAccessLayer.Abstract
 {
-    internal interface IWeatherForecastDal : IGenericDal<WeatherForecast>
+    public interface IWeatherForecastDal : IGenericDal<WeatherForecast>
     {
     }
 }
