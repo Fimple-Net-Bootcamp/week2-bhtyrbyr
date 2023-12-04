@@ -16,6 +16,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalWeahterForecast.Bu
 		{DC6E0B70-E39A-458E-936D-B362B98A1F8B} = {DC6E0B70-E39A-458E-936D-B362B98A1F8B}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalWeahterForecast.WebApi", "UniversalWeahterForecast.WebApi\UniversalWeahterForecast.WebApi.csproj", "{587CD716-26B6-4296-B51C-BC26CE2602EF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02831C6D-5B99-448E-B0BA-8980D70F5D82} = {02831C6D-5B99-448E-B0BA-8980D70F5D82}
+		{123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8} = {123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8}
+		{DC6E0B70-E39A-458E-936D-B362B98A1F8B} = {DC6E0B70-E39A-458E-936D-B362B98A1F8B}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +41,10 @@ Global
 		{02831C6D-5B99-448E-B0BA-8980D70F5D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02831C6D-5B99-448E-B0BA-8980D70F5D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02831C6D-5B99-448E-B0BA-8980D70F5D82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{587CD716-26B6-4296-B51C-BC26CE2602EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{587CD716-26B6-4296-B51C-BC26CE2602EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{587CD716-26B6-4296-B51C-BC26CE2602EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{587CD716-26B6-4296-B51C-BC26CE2602EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
