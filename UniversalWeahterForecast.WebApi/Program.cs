@@ -17,7 +17,7 @@ builder.Services.AddScoped<ICelestalBodyDal, EfCelestalBodyDal>();
 builder.Services.AddScoped<ICelestalBodyService, CelestalBodyManager>();
 
 builder.Services.AddScoped<IWeatherForecastDal, EfWeatherForecastDal>();
-builder.Services.AddScoped<IWeatherForecastService<WeatherForecast>, WeatherForecastManager>();
+builder.Services.AddScoped<IWeatherForecastService, WeatherForecastManager>();
 
 builder.Services.AddScoped<IWeatherTypeDal, EfWeatherTypeDal>();
 builder.Services.AddScoped<IWeatherTypeService, WeatherTypeManager>();

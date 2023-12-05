@@ -8,12 +8,12 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Abstract
 {
-    public interface IWeatherForecastService<T> where T : class
+    public interface IWeatherForecastService
     {
-        void TInsert(T t);
-        void TDelete(T t);
-        void TUpdate(T t);
-        List<ViewWeatherForecastDTO> TGetList();
-        T TGetByID(int id);
+        /*void TInsert(WeatherForecast t);
+        void TDelete(WeatherForecast t);
+        void TUpdate(WeatherForecast t);*/
+        List<ViewWeatherForecastDTO> TGetList(Dictionary<string, string> filters);
+        ViewWeatherForecastDTO TGetByID(int id);
     }
 }

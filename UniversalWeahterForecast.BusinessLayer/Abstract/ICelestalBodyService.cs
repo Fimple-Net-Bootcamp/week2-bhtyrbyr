@@ -8,7 +8,12 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Abstract
 {
-    public interface ICelestalBodyService : IGenericService<CelestalBody>
+    public interface ICelestalBodyService
     {
+        void TInsert(CelestalBody t);
+        void TDelete(CelestalBody t);
+        void TUpdate(CelestalBody t);
+        List<CelestalBody> TGetList();
+        CelestalBody TGetByID(int id);
     }
 }

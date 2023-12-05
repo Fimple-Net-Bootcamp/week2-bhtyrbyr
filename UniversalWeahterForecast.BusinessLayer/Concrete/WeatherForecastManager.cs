@@ -13,46 +13,48 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
-    public class WeatherForecastManager : IWeatherForecastService<WeatherForecast>
+    public class WeatherForecastManager : IWeatherForecastService
     {
-        //private readonly IUniversalWeatherForecastDbContext _dbContext;
-        private readonly ICelestalBodyDal _celestalBodyDal;
-        private readonly IWeatherForecastDal _weatherForecastDal;
-        private readonly IWeatherTypeDal _weatherTypeDal;
         private readonly IUniversalWeatherForecastDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public WeatherForecastManager(ICelestalBodyDal celestalBodyDal, IWeatherForecastDal weatherForecastDal, IWeatherTypeDal weatherTypeDal, IUniversalWeatherForecastDbContext dbContext, IMapper mapper)
+        public WeatherForecastManager(IUniversalWeatherForecastDbContext dbContext, IMapper mapper)
         {
-            _celestalBodyDal = celestalBodyDal;
-            _weatherForecastDal = weatherForecastDal;
-            _weatherTypeDal = weatherTypeDal;
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
+        /*
         public void TDelete(WeatherForecast t)
         {
             _weatherForecastDal.Delete(t);
         }
-
-        public WeatherForecast TGetByID(int id)
+        */
+        public ViewWeatherForecastDTO TGetByID(int id)
         {
-            return _weatherForecastDal.GetByID(id);
+            // Verilerin alınması
+            var item = _dbContext.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).SingleOrDefault(record => record.Id == id);
+
+            // Filtrelerin uygulanması
+            var itemDTO = _mapper.Map<ViewWeatherForecastDTO>(item);
+
+            return itemDTO;
         }
-
-        public List<ViewWeatherForecastDTO> TGetList()
+        
+        public List<ViewWeatherForecastDTO> TGetList(Dictionary<string, string> filters)
         {
-            var weatherForecasts = _weatherForecastDal.GetList();
-            var celestalBodys = _celestalBodyDal.GetList();
-            var weatherTypes = _weatherTypeDal.GetList();
-
+            // Verilerin alınması
             var list = _dbContext.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).ToList();
-            var olist = new List<ViewWeatherForecastDTO>(_mapper.Map<List<ViewWeatherForecastDTO>>(list));
 
+            foreach(var filter in filters)
+            {
+                Console.WriteLine($"{filter.Key} {filter.Value}");
+            }
+
+            // Filtrelerin uygulanması
+            var olist = new List<ViewWeatherForecastDTO>(_mapper.Map<List<ViewWeatherForecastDTO>>(list));
             return olist;
         }
-
+        /*
         public void TInsert(WeatherForecast t)
         {
             _weatherForecastDal.Insert(t);
@@ -61,6 +63,6 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         public void TUpdate(WeatherForecast t)
         {
             _weatherForecastDal.Update(t);
-        }
+        }*/
     }
 }

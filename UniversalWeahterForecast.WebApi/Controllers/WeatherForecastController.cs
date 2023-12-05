@@ -8,16 +8,16 @@ namespace UniversalWeahterForecast.WebApi.Controllers
     [Route("[controller]s")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly IWeatherForecastService<WeatherForecast> _service;
-        public WeatherForecastController(IWeatherForecastService<WeatherForecast> service)
+        private readonly IWeatherForecastService _service;
+        public WeatherForecastController(IWeatherForecastService service)
         {
             _service = service;
         }
 
         [HttpGet("")]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] Dictionary<string, string> filters)
         {
-            var values = _service.TGetList();
+            var values = _service.TGetList(filters);
             return Ok(values);
         }
 
