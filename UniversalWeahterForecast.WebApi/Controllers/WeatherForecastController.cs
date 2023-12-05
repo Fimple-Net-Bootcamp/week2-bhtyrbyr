@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
+using UniversalWeahterForecast.BusinessLayer.Queries;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.WebApi.Controllers
@@ -15,7 +16,7 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Get([FromQuery] Dictionary<string, string> filters)
+        public IActionResult Get([FromQuery] WeatherForecastGelAllQueries filters)
         {
             var values = _service.TGetList(filters);
             return Ok(values);

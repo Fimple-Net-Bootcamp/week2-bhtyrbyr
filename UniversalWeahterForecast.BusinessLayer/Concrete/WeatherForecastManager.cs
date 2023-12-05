@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
-using UniversalWeahterForecast.DataAccessLayer.Abstract;
+using UniversalWeahterForecast.BusinessLayer.Queries;
 using UniversalWeahterForecast.DataAccessLayer.DBOperations;
-using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
@@ -40,15 +35,43 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             return itemDTO;
         }
         
-        public List<ViewWeatherForecastDTO> TGetList(Dictionary<string, string> filters)
+        public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGelAllQueries filters)
         {
-            // Verilerin alınması
-            var list = _dbContext.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).ToList();
-
-            foreach(var filter in filters)
+            // Sorgunun Hazırlanması
+            var query = _dbContext.WeatherForecasts.AsQueryable();
+            if ((filters.StartDate > filters.EndDate) && (filters.EndDate != DateTime.MinValue))
             {
-                Console.WriteLine($"{filter.Key} {filter.Value}");
+                throw new ArgumentOutOfRangeException("Başlangıç tarihi, bitiş tarihinden sonra olamaz!");
             }
+            else if (filters.StartDate != DateTime.MinValue && filters.EndDate != DateTime.MinValue)
+            {
+                query = query.Where(record => record.WeatherTime >= filters.StartDate).Where(record => record.WeatherTime <=  filters.EndDate);
+            }
+            else
+            {
+                if      (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
+                else if (filters.EndDate   != DateTime.MinValue) query = query.Where(record => record.WeatherTime <= filters.EndDate);
+            }
+            foreach (var item in filters.Sort)
+            {
+                List<string> sortDirection = item.Split(',').ToList();
+                if (sortDirection[1] == "asc")
+                {
+                    query = query.OrderBy(sortDirection[0]);
+                }
+                else if (sortDirection[1] == "desc")
+                {
+                    query = query.OrderBy(sortDirection[0] + " descending");
+                }
+            }
+            foreach(var item in filters.DelistingIds)
+            {
+                query = query.Where(x => x.BodyId != item);
+            }
+
+            var deneme = query.ToList();
+
+            var list = query.Include(x => x.Body).Include(x => x.Type).ToList();
 
             // Filtrelerin uygulanması
             var olist = new List<ViewWeatherForecastDTO>(_mapper.Map<List<ViewWeatherForecastDTO>>(list));
