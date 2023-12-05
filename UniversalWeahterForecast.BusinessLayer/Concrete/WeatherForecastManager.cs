@@ -37,7 +37,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         
         public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGelAllQueries filters)
         {
-            // Sorgunun Hazırlanması
+            // Sorgunun Hazırlanması - Başlangıç
             var query = _dbContext.WeatherForecasts.AsQueryable();
             if ((filters.StartDate > filters.EndDate) && (filters.EndDate != DateTime.MinValue))
             {
@@ -64,13 +64,10 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
                     query = query.OrderBy(sortDirection[0] + " descending");
                 }
             }
-            foreach(var item in filters.DelistingIds)
-            {
-                query = query.Where(x => x.BodyId != item);
-            }
+            query = query.Where(x =>!filters.DelistingIds.Contains(x.BodyId));
+            // Sorgunun Hazırlanması - Bitiş
 
-            var deneme = query.ToList();
-
+            //Sorgunun yapılması ve verilerin birleştirilmesi
             var list = query.Include(x => x.Body).Include(x => x.Type).ToList();
 
             // Filtrelerin uygulanması
