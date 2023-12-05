@@ -19,9 +19,9 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             _dal = dal;
         }
 
-        public void TDelete(CelestalBody t)
+        public void TDelete(int id)
         {
-            _dal.Delete(t);
+            _dal.Delete(id);
         }
 
         public CelestalBody TGetByID(int id)

@@ -16,9 +16,10 @@ namespace UniversalWeahterForecast.DataAccessLayer.Repositories
         {
             _context = context;
         }
-        public void Delete(T t)
+        public void Delete(int t)
         {
-            _context.Remove(t);
+            var item = GetByID(t);
+            _context.Remove(item);
             _context.SaveChanges();
         }
 

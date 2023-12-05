@@ -11,10 +11,12 @@ namespace UniversalWeahterForecast.BusinessLayer.Abstract
 {
     public interface IWeatherForecastService
     {
-        /*void TInsert(WeatherForecast t);
-        void TDelete(WeatherForecast t);
-        void TUpdate(WeatherForecast t);*/
+        //void TInsert(WeatherForecast t);
+        void TDelete(int id);
+        //void TUpdate(WeatherForecast t);
         List<ViewWeatherForecastDTO> TGetList(WeatherForecastGelAllQueries filters);
-        ViewWeatherForecastDTO TGetByID(int id);
+        ViewWeatherForecastDTO TGetById(int id);
+
+        IQueryable<WeatherForecast> CreateQuery(WeatherForecastGelAllQueries filters);
     }
 }

@@ -22,10 +22,10 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             return Ok(values);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [HttpGet("{Id}")]
+        public IActionResult GetById(int Id)
         {
-            var values = _service.TGetByID(id);
+            var values = _service.TGetById(Id);
             return Ok(values);
         }
     }

@@ -4,38 +4,26 @@ using System.Linq.Dynamic.Core;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
 using UniversalWeahterForecast.BusinessLayer.Queries;
+using UniversalWeahterForecast.DataAccessLayer.Abstract;
 using UniversalWeahterForecast.DataAccessLayer.DBOperations;
+using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
     public class WeatherForecastManager : IWeatherForecastService
     {
         private readonly IUniversalWeatherForecastDbContext _dbContext;
+        private readonly IWeatherForecastDal _dal;
         private readonly IMapper _mapper;
 
-        public WeatherForecastManager(IUniversalWeatherForecastDbContext dbContext, IMapper mapper)
+        public WeatherForecastManager(IUniversalWeatherForecastDbContext dbContext, IWeatherForecastDal dal, IMapper mapper)
         {
             _dbContext = dbContext;
+            _dal = dal;
             _mapper = mapper;
         }
-        /*
-        public void TDelete(WeatherForecast t)
-        {
-            _weatherForecastDal.Delete(t);
-        }
-        */
-        public ViewWeatherForecastDTO TGetByID(int id)
-        {
-            // Verilerin alınması
-            var item = _dbContext.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).SingleOrDefault(record => record.Id == id);
 
-            // Filtrelerin uygulanması
-            var itemDTO = _mapper.Map<ViewWeatherForecastDTO>(item);
-
-            return itemDTO;
-        }
-        
-        public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGelAllQueries filters)
+        public IQueryable<WeatherForecast> CreateQuery(WeatherForecastGelAllQueries filters)
         {
             // Sorgunun Hazırlanması - Başlangıç
             var query = _dbContext.WeatherForecasts.AsQueryable();
@@ -45,12 +33,12 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             }
             else if (filters.StartDate != DateTime.MinValue && filters.EndDate != DateTime.MinValue)
             {
-                query = query.Where(record => record.WeatherTime >= filters.StartDate).Where(record => record.WeatherTime <=  filters.EndDate);
+                query = query.Where(record => record.WeatherTime >= filters.StartDate).Where(record => record.WeatherTime <= filters.EndDate);
             }
             else
             {
-                if      (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
-                else if (filters.EndDate   != DateTime.MinValue) query = query.Where(record => record.WeatherTime <= filters.EndDate);
+                if (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
+                else if (filters.EndDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime <= filters.EndDate);
             }
             foreach (var item in filters.Sort)
             {
@@ -64,8 +52,24 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
                     query = query.OrderBy(sortDirection[0] + " descending");
                 }
             }
-            query = query.Where(x =>!filters.DelistingIds.Contains(x.BodyId));
-            // Sorgunun Hazırlanması - Bitiş
+            return query = query.Where(x => !filters.DelistingIds.Contains(x.BodyId));
+        }
+
+        public ViewWeatherForecastDTO TGetById(int id)
+        {
+            // Verilerin alınması
+            var item = _dbContext.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).SingleOrDefault(record => record.Id == id);
+
+            // Filtrelerin uygulanması
+            var itemDTO = _mapper.Map< ViewWeatherForecastDTO>(item);
+
+            return itemDTO;
+        }
+        
+        public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGelAllQueries filters)
+        {
+            // Sorgunun Hazırlanması 
+            var query = CreateQuery(filters);
 
             //Sorgunun yapılması ve verilerin birleştirilmesi
             var list = query.Include(x => x.Body).Include(x => x.Type).ToList();
@@ -73,6 +77,12 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             // Filtrelerin uygulanması
             var olist = new List<ViewWeatherForecastDTO>(_mapper.Map<List<ViewWeatherForecastDTO>>(list));
             return olist;
+        }
+
+        
+        public void TDelete(int id)
+        {
+           _dal.Delete(id);
         }
         /*
         public void TInsert(WeatherForecast t)

@@ -18,9 +18,9 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             _dal = dal;
         }
 
-        public void TDelete(WeatherType t)
+        public void TDelete(int id)
         {
-            _dal.Delete(t);
+            _dal.Delete(id);
         }
 
         public WeatherType TGetByID(int id)
