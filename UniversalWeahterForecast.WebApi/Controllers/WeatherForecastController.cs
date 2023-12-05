@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
+using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.WebApi.Controllers
 {
@@ -7,8 +8,8 @@ namespace UniversalWeahterForecast.WebApi.Controllers
     [Route("[controller]s")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly IWeatherForecastService _service;
-        public WeatherForecastController(IWeatherForecastService service)
+        private readonly IWeatherForecastService<WeatherForecast> _service;
+        public WeatherForecastController(IWeatherForecastService<WeatherForecast> service)
         {
             _service = service;
         }
