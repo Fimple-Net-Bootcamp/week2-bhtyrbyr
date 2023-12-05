@@ -19,13 +19,19 @@ namespace UniversalWeahterForecast.DataAccessLayer.Repositories
         public void Delete(int t)
         {
             var item = GetByID(t);
+            if (item is null)
+                throw new ArgumentNullException("Girilen ID'ye ait veri bulunamadı!");
             _context.Remove(item);
             _context.SaveChanges();
+
         }
 
         public T GetByID(int id)
         {
-            return _context.Set<T>().Find(id);
+            var item = _context.Set<T>().Find(id);
+            if (item is null)
+                throw new ArgumentNullException("Girilen ID'ye ait veri bulunamadı!");
+            return item;
         }
 
         public List<T> GetList()
@@ -35,14 +41,27 @@ namespace UniversalWeahterForecast.DataAccessLayer.Repositories
 
         public void Insert(T t)
         {
-            _context.Add(t);
-            _context.SaveChanges();
+            try
+            {
+                _context.Add(t);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new MissingFieldException("Veri kaydedilirken bir hata oluştu!");
+            }
         }
 
         public void Update(T t)
         {
-            _context.Update(t);
-            _context.SaveChanges();
+            try
+            {
+                _context.Update(t);
+                _context.SaveChanges();
+            }catch(Exception ex)
+            {
+                throw new MissingFieldException("Veri kaydedilirken bir hata oluştu!");
+            }
         }
     }
 }

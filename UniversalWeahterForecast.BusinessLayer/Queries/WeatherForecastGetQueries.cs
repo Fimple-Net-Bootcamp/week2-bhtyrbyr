@@ -1,13 +1,12 @@
 ﻿namespace UniversalWeahterForecast.BusinessLayer.Queries
 {
-    public class WeatherForecastGelAllQueries
+    public class WeatherForecastGetQueries
     {
-        public WeatherForecastGelAllQueries()
+        public WeatherForecastGetQueries()
         {
             Sort = new();
             DelistingIds = new();
         }
-
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public List<string> Sort { get; set; }

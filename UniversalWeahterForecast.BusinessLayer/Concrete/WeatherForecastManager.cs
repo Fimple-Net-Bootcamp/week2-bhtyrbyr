@@ -23,7 +23,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IQueryable<WeatherForecast> CreateQuery(WeatherForecastGelAllQueries filters)
+        public IQueryable<WeatherForecast> CreateQuery(WeatherForecastGetQueries filters)
         {
             // Sorgunun Hazırlanması - Başlangıç
             var query = _dbContext.WeatherForecasts.AsQueryable();
@@ -52,14 +52,15 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         {
             // Verilerin alınması
             var item = _dbContext.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).SingleOrDefault(record => record.Id == id);
-
+            if (item is null)
+                throw new ArgumentNullException("Girilen ID'ye ait bir veri bulunmadı!");
             // Filtrelerin uygulanması
             var itemDTO = _mapper.Map< ViewWeatherForecastDTO>(item);
 
             return itemDTO;
         }
         
-        public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGelAllQueries filters)
+        public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGetQueries filters)
         {
             // Sorgunun Hazırlanması 
             var query = CreateQuery(filters);
@@ -77,12 +78,15 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         {
            _dal.Delete(id);
         }
-        /*
-        public void TInsert(WeatherForecast t)
-        {
-            _weatherForecastDal.Insert(t);
-        }
+        
 
+        public void TInsert(CreateWeatherForecastDTO t)
+        {
+
+            WeatherForecast model = new();
+            _dal.Insert(model);
+        }
+        /*
         public void TUpdate(WeatherForecast t)
         {
             _weatherForecastDal.Update(t);

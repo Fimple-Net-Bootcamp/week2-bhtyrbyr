@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
+using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
 using UniversalWeahterForecast.BusinessLayer.Queries;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 
@@ -16,24 +17,62 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Get([FromQuery] WeatherForecastGelAllQueries filters)
+        public IActionResult Get([FromQuery] WeatherForecastGetQueries filters)
         {
-            var values = _service.TGetList(filters);
-            return Ok(values);
+            try
+            {
+                var values = _service.TGetList(filters);
+                return Ok(values);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{Id}")]
         public IActionResult GetById(int Id)
         {
-            var values = _service.TGetById(Id);
-            return Ok(values);
+            try
+            {
+                var values = _service.TGetById(Id);
+                return Ok(values);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{Id}")]
-        public IActionResult DeleteById(int Id)
+        public IActionResult Delete(int Id)
         {
-            _service.TDelete(Id);
-            return Ok();
+            try
+            {
+                _service.TDelete(Id);
+                return Ok();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("")]
+        public IActionResult Create([FromBody] CreateWeatherForecastDTO model)
+        {
+            try
+            {
+                _service.TInsert(model);
+                return CreatedAtAction(nameof(GetById), new { id = 1 }, _service.TGetById(1));
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest();
+            }
         }
     }
 }
