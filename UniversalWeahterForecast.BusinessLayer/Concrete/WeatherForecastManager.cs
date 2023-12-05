@@ -27,19 +27,12 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         {
             // Sorgunun Hazırlanması - Başlangıç
             var query = _dbContext.WeatherForecasts.AsQueryable();
-            if ((filters.StartDate > filters.EndDate) && (filters.EndDate != DateTime.MinValue))
+            if ((filters.EndDate > filters.StartDate) && (filters.EndDate != DateTime.MinValue))
             {
-                throw new ArgumentOutOfRangeException("Başlangıç tarihi, bitiş tarihinden sonra olamaz!");
+                if      (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
+                else if (filters.EndDate != DateTime.MinValue)   query = query.Where(record => record.WeatherTime <= filters.EndDate);
             }
-            else if (filters.StartDate != DateTime.MinValue && filters.EndDate != DateTime.MinValue)
-            {
-                query = query.Where(record => record.WeatherTime >= filters.StartDate).Where(record => record.WeatherTime <= filters.EndDate);
-            }
-            else
-            {
-                if (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
-                else if (filters.EndDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime <= filters.EndDate);
-            }
+
             foreach (var item in filters.Sort)
             {
                 List<string> sortDirection = item.Split(',').ToList();

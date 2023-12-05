@@ -28,5 +28,12 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             var values = _service.TGetById(Id);
             return Ok(values);
         }
+
+        [HttpDelete("{Id}")]
+        public IActionResult DeleteById(int Id)
+        {
+            _service.TDelete(Id);
+            return Ok();
+        }
     }
 }
