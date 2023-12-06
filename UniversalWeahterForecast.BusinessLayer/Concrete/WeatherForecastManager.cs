@@ -65,13 +65,13 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             return olist;
         }
 
-        public List<ViewWeatherForecastDTO> TGetListByCelestalBodyId(int id, WeatherForecastGetQueries filters, bool type)
+        public List<ViewWeatherForecastDTO> TGetListByCelestalBodyId(int id, WeatherForecastGetQueries filters)
         {
             // Sorgunun Hazırlanması 
             var query = CreateQuery(filters);
 
             //Sorgunun yapılması ve verilerin birleştirilmesi
-            var list = query.Include(x => x.Body).Include(x => x.Type).Where(x => x.Body.Id == id && x.Body.IsPlanet == type).ToList();
+            var list = query.Include(x => x.Body).Include(x => x.Type).Where(x => x.Body.Id == id).ToList();
 
             if (list.Count == 0) throw new InvalidDataException("Girilen ID'ye ait bir gök cismi bulunamadı!");
             // Filtrelerin uygulanması

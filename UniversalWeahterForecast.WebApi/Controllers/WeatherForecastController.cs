@@ -48,18 +48,12 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             }
         }
 
-        [HttpGet("{CelestalBodyType}/{id}")]
-        public IActionResult GetByCelestalBodyId(string CelestalBodyType, int id, [FromQuery] WeatherForecastGetQueries filters)
+        [HttpGet("CelestalBodies/{id}")]
+        public IActionResult GetByCelestalBodyId(int id, [FromQuery] WeatherForecastGetQueries filters)
         {
             try
             {
-                var values = new List<ViewWeatherForecastDTO>();
-                if (string.Equals(CelestalBodyType, "planet"))          
-                    values = _service.TGetListByCelestalBodyId(id, filters, true);
-                else if (string.Equals(CelestalBodyType, "Satellite"))  
-                    values = _service.TGetListByCelestalBodyId(id, filters, false);
-                else                                                    
-                    return BadRequest($"Girilen \"{CelestalBodyType + "/" + id}\" adres bulunamadý!");
+                var values = _service.TGetListByCelestalBodyId(id, filters);
                 return Ok(values);
             }
             catch (Exception ex)
