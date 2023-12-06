@@ -25,7 +25,7 @@ namespace UniversalWeahterForecast.DataAccessLayer.EntityFramework
         public WeatherForecast GetByID(int id)
         {
             var item = _context.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).SingleOrDefault(x => x.Id == id);
-            if (item.Id == 0)
+            if (item is null)
                 throw new ArgumentNullException("Girilen ID'ye ait veri bulunamadı!");
             return item;
         }
@@ -44,8 +44,8 @@ namespace UniversalWeahterForecast.DataAccessLayer.EntityFramework
         {
             try
             {
-                if (!_context.CelestalBodies.Any(x => x.Id == t.Id)) throw new InvalidOperationException("Geçerli bir gök cismi ID'si giriniz!");
-                if (!_context.WeatherTypes.Any(x => x.Id == t.Id)) throw new InvalidOperationException("Tanımlı bir hava olayı ID'si giriniz!");
+                if (!_context.CelestalBodies.Any(x => x.Id == t.BodyId)) throw new InvalidOperationException("Geçerli bir gök cismi ID'si giriniz!");
+                if (!_context.WeatherTypes.Any(x => x.Id == t.TypeId)) throw new InvalidOperationException("Tanımlı bir hava olayı ID'si giriniz!");
                 _context.WeatherForecasts.Add(t);
                 _context.SaveChanges();
             }
@@ -59,6 +59,8 @@ namespace UniversalWeahterForecast.DataAccessLayer.EntityFramework
         {
             try
             {
+                if (!_context.CelestalBodies.Any(cBodies => cBodies.Id == t.BodyId)) throw new InvalidDataException("Girilen ID'ye ait bir gök cismi bulunamadı!");
+                if (!_context.WeatherTypes.Any(wTypes => wTypes.Id == t.TypeId)) throw new InvalidDataException("Girilen ID'ye ait bir hava durumu bilgisi bulunamadı!");
                 _context.Update(t);
                 _context.SaveChanges();
             }

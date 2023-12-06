@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
+using UniversalWeahterForecast.BusinessLayer.DTOs.Validator.WeatherForecastValidator;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
 using UniversalWeahterForecast.BusinessLayer.Queries;
 using UniversalWeahterForecast.DataAccessLayer.Abstract;
@@ -30,8 +32,8 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             var query = _dal.GetQuariable();
             if ((filters.EndDate > filters.StartDate) && (filters.EndDate != DateTime.MinValue))
             {
-                if      (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
-                else if (filters.EndDate != DateTime.MinValue)   query = query.Where(record => record.WeatherTime <= filters.EndDate);
+                if (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
+                if (filters.EndDate != DateTime.MinValue)   query = query.Where(record => record.WeatherTime <= filters.EndDate);
             }
 
             foreach (var item in filters.Sort)
@@ -48,18 +50,6 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             }
             return query = query.Where(x => !filters.DelistingIds.Contains(x.BodyId));
         }
-
-        public ViewWeatherForecastDTO TGetById(int id)
-        {
-            // Verilerin alınması
-            var item = _dal.GetByID(id);
-            if (item is null)
-                throw new ArgumentNullException("Girilen ID'ye ait bir veri bulunmadı!");
-            // Filtrelerin uygulanması
-            var itemDTO = _mapper.Map< ViewWeatherForecastDTO>(item);
-
-            return itemDTO;
-        }
         
         public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGetQueries filters)
         {
@@ -74,7 +64,19 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             return olist;
         }
 
-        
+        public ViewWeatherForecastDTO TGetById(int id)
+        {
+            // Verilerin alınması
+            var item = _dal.GetByID(id);
+            if (item is null)
+                throw new ArgumentNullException("Girilen ID'ye ait bir veri bulunmadı!");
+            // Filtrelerin uygulanması
+            var itemDTO = _mapper.Map<ViewWeatherForecastDTO>(item);
+
+            return itemDTO;
+        }
+
+
         public void TDelete(int id)
         {
            _dal.Delete(id);
@@ -83,15 +85,23 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
 
         public int TInsert(CreateWeatherForecastDTO t)
         {
-
+            CreateWeatherForecastDTOValidator validator = new();
+            validator.ValidateAndThrow(t);
             var model = _mapper.Map<WeatherForecast>(t);
             _dal.Insert(model);
             return model.Id;
         }
-        /*
-        public void TUpdate(WeatherForecast t)
+        
+        public void TUpdate(int id, UpdateWeatherForecastDTO t)
         {
-            _weatherForecastDal.Update(t);
-        }*/
+            UpdateWeatherForecastDTOValidator validator = new();
+            var item = _dal.GetByID(id);
+            if (item is null) throw new Exception("Girilen ID'ye ait güncellenebilir bir veri bulunamadı!");
+            validator.ValidateAndThrow(t);
+            item.BodyId = t.BodyId == default ? item.BodyId : t.BodyId;
+            item.TypeId = t.TypeId == default ? item.TypeId : t.TypeId;
+            item.Temprature = t.Temprature == default ? item.Temprature : t.Temprature;
+            _dal.Update(item);
+        }
     }
 }

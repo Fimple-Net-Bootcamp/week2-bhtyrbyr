@@ -51,7 +51,7 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             try
             {
                 _service.TDelete(Id);
-                return Ok();
+                return NoContent();
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -76,9 +76,26 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpPut("{Id}")]
-        public IActionResult Update(int Id, UpdateWeatherForecastDTO model)
+        public IActionResult UpdateWithDTO(int Id, UpdateWeatherForecastDTO model)
+        {
+            try
+            {
+                _service.TUpdate(Id, model);
+                return Ok();
+                //return CreatedAtAction(nameof(GetById), new { id = modelId }, newModel);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("{Id}")]
+        public IActionResult UpdateWithPatch(int Id, UpdateWeatherForecastDTO model)
         {
             _service.TUpdate(Id, model);
+            return Ok();
         }
     }
 }
