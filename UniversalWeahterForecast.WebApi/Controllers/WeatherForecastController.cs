@@ -109,7 +109,7 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpPatch("{Id}")]
-        public IActionResult UpdateWithPatch(int Id, JsonPatchDocument<WeatherForecast> model)
+        public IActionResult UpdateWithPatch(int Id, [FromBody] JsonPatchDocument<WeatherForecast> model)
         {
             try
             {

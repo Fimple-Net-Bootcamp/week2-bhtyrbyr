@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
+using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.WebApi.Controllers
 {
@@ -28,6 +29,13 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             var list = _service.TGetList();
             var satellitesList = list = list.Where(x => x.IsPlanet == false).ToList();
             return Ok(satellitesList);
+        }
+
+        [HttpPost("")]
+        public IActionResult Create(CelestalBody model)
+        {
+            _service.TInsert(model);
+            return Ok();
         }
     }
 }
