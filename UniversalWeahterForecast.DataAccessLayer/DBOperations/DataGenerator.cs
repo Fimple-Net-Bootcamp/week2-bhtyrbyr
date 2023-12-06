@@ -22,31 +22,20 @@ namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
                 Random rnd = new();
 
                 context.CelestalBodies.AddRange(
-                        new CelestalBody { Name = "Luminara", 		IsPlanet = true },
-                        new CelestalBody { Name = "Celestria", 	    IsPlanet = true },
-                        new CelestalBody { Name = "Nebulonova", 	IsPlanet = true },
-                        new CelestalBody { Name = "Astrionyx",  	IsPlanet = false },
-                        new CelestalBody { Name = "Galactrix",  	IsPlanet = true },
-                        new CelestalBody { Name = "Stellara", 		IsPlanet = true },
-                        new CelestalBody { Name = "Quasarion", 	    IsPlanet = true },
-                        new CelestalBody { Name = "Novaflare", 	    IsPlanet = true },
-                        new CelestalBody { Name = "Astrolynx", 	    IsPlanet = false },
-                        new CelestalBody { Name = "Cosmirova", 	    IsPlanet = true },
-                        new CelestalBody { Name = "Orionex", 		IsPlanet = true },
-                        new CelestalBody { Name = "Astralspire", 	IsPlanet = true },
-                        new CelestalBody { Name = "Nebulique", 	    IsPlanet = true },
-                        new CelestalBody { Name = "Stellarion", 	IsPlanet = false },
-                        new CelestalBody { Name = "Galaxara", 		IsPlanet = true },
-                        new CelestalBody { Name = "Lunatrix", 		IsPlanet = true },
-                        new CelestalBody { Name = "Solarionis", 	IsPlanet = true },
-                        new CelestalBody { Name = "Celestialis", 	IsPlanet = false },
-                        new CelestalBody { Name = "Astronique", 	IsPlanet = false },
-                        new CelestalBody { Name = "Nebuliqueon", 	IsPlanet = false },
-                        new CelestalBody { Name = "Cometrix", 		IsPlanet = true },
-                        new CelestalBody { Name = "Starblaze", 	    IsPlanet = true },
-                        new CelestalBody { Name = "Lunarisphere", 	IsPlanet = true },
-                        new CelestalBody { Name = "Solarflareon", 	IsPlanet = false },
-                        new CelestalBody { Name = "Nebulonia",      IsPlanet = true }
+                        new CelestalBody { Name = "Celestria", 	    WhoseSatellite = 0}, //1 //1+
+                        new CelestalBody { Name = "Stellara",       WhoseSatellite = 0}, //2 //1
+                        new CelestalBody { Name = "Cosmirova", 	    WhoseSatellite = 0}, //3 //2+
+                        new CelestalBody { Name = "Galaxara", 		WhoseSatellite = 0}, //4 //2+
+                        new CelestalBody { Name = "Lunatria", 		WhoseSatellite = 0}, //5 //1
+                        new CelestalBody { Name = "Nebulonia",      WhoseSatellite = 0}, //6 //1
+                        new CelestalBody { Name = "Astrionyx",  	WhoseSatellite = 1},
+                        new CelestalBody { Name = "Galactrix",  	WhoseSatellite = 4},
+                        new CelestalBody { Name = "Quasarion", 	    WhoseSatellite = 3},
+                        new CelestalBody { Name = "Novaflare", 	    WhoseSatellite = 2},
+                        new CelestalBody { Name = "Astrolynx", 	    WhoseSatellite = 4},
+                        new CelestalBody { Name = "Orionex", 		WhoseSatellite = 3},
+                        new CelestalBody { Name = "Astralspire", 	WhoseSatellite = 5},
+                        new CelestalBody { Name = "Nebulique", 	    WhoseSatellite = 6}
                     );
 
                 context.WeatherTypes.AddRange(

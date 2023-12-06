@@ -6,7 +6,7 @@ using UniversalWeahterForecast.BusinessLayer.Queries;
 namespace UniversalWeahterForecast.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]s")]
+    [Route("/api/v1/[controller]s")]
     public class WeatherForecastController : ControllerBase
     {
         private readonly IWeatherForecastService _service;

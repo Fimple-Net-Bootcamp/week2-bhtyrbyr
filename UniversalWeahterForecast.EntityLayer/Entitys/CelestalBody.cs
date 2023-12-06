@@ -13,5 +13,6 @@ namespace UniversalWeahterForecast.EntityLayer.Entitys
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsPlanet { get; set; }
+        public int WhoseSatellite { get; set; }
     }
 }
