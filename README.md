@@ -1,10 +1,6 @@
 
 # Uzay Hava Durumu API
 
-
-
-
-
 ## Projede kullanılan paketler:
 
 ```
