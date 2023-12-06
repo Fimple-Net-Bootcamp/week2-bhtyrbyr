@@ -1,0 +1,29 @@
+env:
+  DOTNET_VERSION: '7.0.x' 
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+name: 🎉 Deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-lastest
+    steps:
+      - uses: actions/checkout@v3
+      - name: .NET Core kurulumu
+        with:
+          dotnet-verison: ${{ env.DOTNET_VERSION }}
+
+      - name: Derleme Öncesi Bağımlılık Önbelleğini Ayarlama
+        uses: actions/cache@3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Dotnet ile Build Etme
+        run: dotnet build --configuration Release
