@@ -76,6 +76,8 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
 
         public void TUpdate(int id, UpdateCelestalBodyDTO model)
         {
+            UpdateCelestalBodyDTOValidator validator = new();
+            validator.ValidateAndThrow(model);
             var item = _dal.GetByID(id);
             if (item is null) throw new InvalidDataException("Girilen ID'ye ait kayıt bulunamadı!");
             item.Name = model.Name == "string" ? item.Name : model.Name;
