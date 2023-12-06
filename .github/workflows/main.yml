@@ -6,7 +6,7 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-name: 🎉 Deploy
+name: 🎉 Build
 
 jobs:
   build:
@@ -20,13 +20,14 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Derleme Öncesi Bağımlılık Önbelleğini Ayarlama
-        uses: actions/cache@3
+      - name: Derleme öncesi Bağımlılık Önbelleğini Ayarlama
+        uses: actions/cache@v3
         with:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
 
-      - name: Dotnet ile Build Etme
+      - name: .Net Core ile Build Et
         run: dotnet build --configuration Release
+
