@@ -15,6 +15,12 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             _service = service;
         }
 
+        [HttpGet("")]
+        public IActionResult GetList()
+        {
+            return Ok(_service.TGetList());
+        }
+
         [HttpGet("Planets")]
         public IActionResult GetPlanets()
         {
@@ -29,6 +35,13 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             var list = _service.TGetList();
             var satellitesList = list = list.Where(x => x.IsPlanet == false).ToList();
             return Ok(satellitesList);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var item = _service.TGetByID(id);
+            return Ok(item);
         }
 
         [HttpPost("")]
