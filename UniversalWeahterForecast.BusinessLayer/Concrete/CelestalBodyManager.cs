@@ -34,13 +34,13 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             foreach (var item in filters.SortingCriterion)
             {
                 List<string> sortDirection = item.Split(',').ToList();
-                if (sortDirection[1] == "asc")
-                {
-                    query = query.OrderBy(sortDirection[0]);
-                }
-                else if (sortDirection[1] == "desc")
+                if (sortDirection[1] == "desc")
                 {
                     query = query.OrderBy(sortDirection[0] + " descending");
+                }
+                else
+                {
+                    query = query.OrderBy(sortDirection[0]);
                 }
             }
 
