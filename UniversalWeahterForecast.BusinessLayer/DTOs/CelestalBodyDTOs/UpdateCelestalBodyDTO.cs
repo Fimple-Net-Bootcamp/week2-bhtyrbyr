@@ -10,6 +10,6 @@ namespace UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs
     {
         public string Name { get; set; }
         public string CelestalBodyType  { get; set; }
-        public string AssociatedCelestalBody { get; set; }
+        public int AssociatedCelestalBody { get; set; }
     }
 }

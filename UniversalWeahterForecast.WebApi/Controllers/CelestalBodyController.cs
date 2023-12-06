@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs;
 using UniversalWeahterForecast.BusinessLayer.Queries;
@@ -73,13 +74,27 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateWithDTO(int id, UpdateCelestalBodyDTO model)
+        public IActionResult UpdateWithDTO(int id, [FromBody] UpdateCelestalBodyDTO model)
         {
             try
             {
                 _service.TUpdate(id, model);
                 return Ok();
             }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult UpdateWithPatch(int id, [FromBody] JsonPatchDocument<CelestalBody> model)
+        {
+            try
+            {
+                _service.TUpdate(id, model);
+                return Ok();
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

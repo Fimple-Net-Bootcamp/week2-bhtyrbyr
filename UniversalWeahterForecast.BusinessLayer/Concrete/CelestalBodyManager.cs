@@ -7,6 +7,7 @@ using AutoMapper;
 using UniversalWeahterForecast.BusinessLayer.Queries;
 using UniversalWeahterForecast.BusinessLayer.DTOs.Validator.CelestalBodyValidator;
 using FluentValidation;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
@@ -83,6 +84,14 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             else if (model.CelestalBodyType == "satellite")     
                 item.IsPlanet = false;
             item.WhoseSatellite = Convert.ToInt32(model.AssociatedCelestalBody);
+            _dal.Update(item);
+        }
+
+        public void TUpdate(int id, JsonPatchDocument<CelestalBody> t)
+        {
+            var item = _dal.GetByID(id);
+            if (item is null) throw new Exception("Girilen ID'ye ait güncellenebilir bir veri bulunamadı!");
+            t.ApplyTo(item);
             _dal.Update(item);
         }
     }

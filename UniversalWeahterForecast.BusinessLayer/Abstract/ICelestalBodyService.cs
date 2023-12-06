@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Abstract
         int TInsert(CreateCelestalBodyDTO t);
         void TDelete(int id);
         void TUpdate(int id, UpdateCelestalBodyDTO model);
+        void TUpdate(int id, JsonPatchDocument<CelestalBody> model);
         List<ViewCelestalBodyDTO> TGetList(GetCelestalBodyQuery filter);
         ViewCelestalBodyDTO TGetByID(int id);
     }
