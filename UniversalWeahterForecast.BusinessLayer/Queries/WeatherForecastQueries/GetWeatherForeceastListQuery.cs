@@ -1,4 +1,4 @@
-﻿namespace UniversalWeahterForecast.BusinessLayer.Queries
+﻿namespace UniversalWeahterForecast.BusinessLayer.Queries.WeatherForecastQueries
 {
     public class GetWeatherForeceastListQuery
     {

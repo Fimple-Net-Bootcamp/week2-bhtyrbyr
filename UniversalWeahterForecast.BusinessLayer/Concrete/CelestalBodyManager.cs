@@ -4,10 +4,10 @@ using UniversalWeahterForecast.DataAccessLayer.Abstract;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 using UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs;
 using AutoMapper;
-using UniversalWeahterForecast.BusinessLayer.Queries;
 using UniversalWeahterForecast.BusinessLayer.DTOs.Validator.CelestalBodyValidator;
 using FluentValidation;
 using Microsoft.AspNetCore.JsonPatch;
+using UniversalWeahterForecast.BusinessLayer.Queries.CelestalBodyQueries;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {

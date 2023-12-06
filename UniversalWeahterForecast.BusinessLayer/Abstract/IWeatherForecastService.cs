@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
-using UniversalWeahterForecast.BusinessLayer.Queries;
+using UniversalWeahterForecast.BusinessLayer.Queries.WeatherForecastQueries;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Abstract

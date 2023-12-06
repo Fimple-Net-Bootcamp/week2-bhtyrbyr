@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UniversalWeahterForecast.DataAccessLayer.DBOperations;
+﻿using UniversalWeahterForecast.DataAccessLayer.DBOperations;
 using UniversalWeahterForecast.DataAccessLayer.Abstract;
-using UniversalWeahterForecast.DataAccessLayer.Repositories;
 using UniversalWeahterForecast.EntityLayer.Entitys;
-using Microsoft.EntityFrameworkCore;
 
 namespace UniversalWeahterForecast.DataAccessLayer.EntityFramework
 {

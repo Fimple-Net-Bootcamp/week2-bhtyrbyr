@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UniversalWeahterForecast.BusinessLayer.Abstract;
+﻿using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.DataAccessLayer.Abstract;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 

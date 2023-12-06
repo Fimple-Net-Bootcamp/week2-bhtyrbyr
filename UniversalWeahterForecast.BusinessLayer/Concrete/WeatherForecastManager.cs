@@ -6,7 +6,7 @@ using System.Linq.Dynamic.Core;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.BusinessLayer.DTOs.Validator.WeatherForecastValidator;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
-using UniversalWeahterForecast.BusinessLayer.Queries;
+using UniversalWeahterForecast.BusinessLayer.Queries.WeatherForecastQueries;
 using UniversalWeahterForecast.DataAccessLayer.Abstract;
 using UniversalWeahterForecast.DataAccessLayer.DBOperations;
 using UniversalWeahterForecast.EntityLayer.Entitys;

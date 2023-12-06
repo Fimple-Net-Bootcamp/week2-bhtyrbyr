@@ -5,7 +5,6 @@ using UniversalWeahterForecast.BusinessLayer.Concrete;
 using UniversalWeahterForecast.DataAccessLayer.Abstract;
 using UniversalWeahterForecast.DataAccessLayer.DBOperations;
 using UniversalWeahterForecast.DataAccessLayer.EntityFramework;
-using UniversalWeahterForecast.EntityLayer.Entitys;
 
 var builder = WebApplication.CreateBuilder(args);
 

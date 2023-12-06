@@ -1,7 +1,6 @@
-﻿
-using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.AspNetCore.JsonPatch;
 using UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs;
-using UniversalWeahterForecast.BusinessLayer.Queries;
+using UniversalWeahterForecast.BusinessLayer.Queries.CelestalBodyQueries;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.Abstract
