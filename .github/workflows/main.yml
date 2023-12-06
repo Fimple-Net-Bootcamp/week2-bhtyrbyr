@@ -10,12 +10,15 @@ name: 🎉 Deploy
 
 jobs:
   build:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - name: .NET Core kurulumu
+
+      - name: .Net Core Kurulumu
+        uses: actions/setup-dotnet@v2
         with:
-          dotnet-verison: ${{ env.DOTNET_VERSION }}
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Derleme Öncesi Bağımlılık Önbelleğini Ayarlama
         uses: actions/cache@3
