@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs
 {
-    internal class ViewSatelliteDTO
+    public class ViewCelestalBodyDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string AssociatedPlanet { get; set; }
+        public string CelestalBodyType { get; set; }
+        public string AssociatedCelestalBody { get; set; }
     }
 }

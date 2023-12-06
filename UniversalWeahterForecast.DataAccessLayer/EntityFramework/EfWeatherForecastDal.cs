@@ -22,6 +22,11 @@ namespace UniversalWeahterForecast.DataAccessLayer.EntityFramework
 
         }
 
+        public IQueryable<WeatherForecast> GetQuariable()
+        {
+            return _context.WeatherForecasts.AsQueryable();
+        }
+
         public WeatherForecast GetByID(int id)
         {
             var item = _context.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).SingleOrDefault(x => x.Id == id);
@@ -33,11 +38,6 @@ namespace UniversalWeahterForecast.DataAccessLayer.EntityFramework
         public List<WeatherForecast> GetList()
         {
             return _context.WeatherForecasts.ToList();
-        }
-
-        public IQueryable<WeatherForecast> GetQuariable()
-        {
-            return _context.WeatherForecasts.AsQueryable();
         }
 
         public void Insert(WeatherForecast t)
