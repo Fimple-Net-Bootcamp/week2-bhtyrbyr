@@ -19,6 +19,7 @@ namespace UniversalWeahterForecast.WebApi.Mapping
                 ).ForMember(
                     dest => dest.TypeName, opt => opt.MapFrom(src => src.Type.Name)
                 );
+            CreateMap<CreateWeatherForecastDTO, WeatherForecast>();
         }
     }
 }

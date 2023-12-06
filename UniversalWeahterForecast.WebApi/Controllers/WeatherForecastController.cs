@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
 using UniversalWeahterForecast.BusinessLayer.Queries;
-using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.WebApi.Controllers
 {
@@ -53,7 +52,7 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             {
                 _service.TDelete(Id);
                 return Ok();
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return BadRequest(ex.Message);
@@ -65,14 +64,21 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         {
             try
             {
-                _service.TInsert(model);
-                return CreatedAtAction(nameof(GetById), new { id = 1 }, _service.TGetById(1));
+                var modelId = _service.TInsert(model);
+                var newModel = _service.TGetById(modelId);
+                return CreatedAtAction(nameof(GetById), new { id = modelId }, newModel);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPut("{Id}")]
+        public IActionResult Update(int Id, UpdateWeatherForecastDTO model)
+        {
+            _service.TUpdate(Id, model);
         }
     }
 }

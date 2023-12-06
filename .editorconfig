@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA1716: Tanımlayıcılar anahtar sözcüklerle eşleşmemelidir
+dotnet_diagnostic.CA1716.severity = none

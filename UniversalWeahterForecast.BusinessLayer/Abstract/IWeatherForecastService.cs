@@ -11,7 +11,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Abstract
 {
     public interface IWeatherForecastService
     {
-        void TInsert(CreateWeatherForecastDTO t);
+        int TInsert(CreateWeatherForecastDTO t);
         void TDelete(int id);
         //void TUpdate(WeatherForecast t);
         List<ViewWeatherForecastDTO> TGetList(WeatherForecastGetQueries filters);

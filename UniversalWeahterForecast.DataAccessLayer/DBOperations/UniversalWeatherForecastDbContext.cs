@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
@@ -21,6 +17,16 @@ namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
         public override int SaveChanges()
         {
             return base.SaveChanges();
+        }
+
+        public override EntityEntry Update(object entity)
+        {
+            return base.Update(entity);
+        }
+
+        public override EntityEntry Remove(object entity)
+        {
+            return base.Remove(entity);
         }
     }
 }

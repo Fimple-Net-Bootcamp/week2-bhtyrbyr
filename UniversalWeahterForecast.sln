@@ -3,20 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalWeahterForecast.EntityLayer", "UniversalWeahterForecast.EntityLayer\UniversalWeahterForecast.EntityLayer.csproj", "{123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversalWeahterForecast.EntityLayer", "UniversalWeahterForecast.EntityLayer\UniversalWeahterForecast.EntityLayer.csproj", "{123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalWeahterForecast.DataAccessLayer", "UniversalWeahterForecast.DataAccessLayer\UniversalWeahterForecast.DataAccessLayer.csproj", "{DC6E0B70-E39A-458E-936D-B362B98A1F8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversalWeahterForecast.DataAccessLayer", "UniversalWeahterForecast.DataAccessLayer\UniversalWeahterForecast.DataAccessLayer.csproj", "{DC6E0B70-E39A-458E-936D-B362B98A1F8B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8} = {123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalWeahterForecast.BusinessLayer", "UniversalWeahterForecast.BusinessLayer\UniversalWeahterForecast.BusinessLayer.csproj", "{02831C6D-5B99-448E-B0BA-8980D70F5D82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversalWeahterForecast.BusinessLayer", "UniversalWeahterForecast.BusinessLayer\UniversalWeahterForecast.BusinessLayer.csproj", "{02831C6D-5B99-448E-B0BA-8980D70F5D82}"
 	ProjectSection(ProjectDependencies) = postProject
 		{123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8} = {123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8}
 		{DC6E0B70-E39A-458E-936D-B362B98A1F8B} = {DC6E0B70-E39A-458E-936D-B362B98A1F8B}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalWeahterForecast.WebApi", "UniversalWeahterForecast.WebApi\UniversalWeahterForecast.WebApi.csproj", "{587CD716-26B6-4296-B51C-BC26CE2602EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniversalWeahterForecast.WebApi", "UniversalWeahterForecast.WebApi\UniversalWeahterForecast.WebApi.csproj", "{587CD716-26B6-4296-B51C-BC26CE2602EF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{02831C6D-5B99-448E-B0BA-8980D70F5D82} = {02831C6D-5B99-448E-B0BA-8980D70F5D82}
 		{123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8} = {123E12AB-DCF1-4672-BAF1-B0D4C98B4AA8}

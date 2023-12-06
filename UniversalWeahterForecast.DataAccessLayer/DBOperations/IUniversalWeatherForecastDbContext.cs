@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
@@ -15,5 +10,7 @@ namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
         DbSet<WeatherForecast> WeatherForecasts { get; set; }
         DbSet<WeatherType> WeatherTypes { get; set; }
         int SaveChanges();
+        EntityEntry Update(object entity);
+        EntityEntry Remove(object entity);
     }
 }

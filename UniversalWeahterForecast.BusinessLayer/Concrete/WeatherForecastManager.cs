@@ -12,13 +12,13 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
     public class WeatherForecastManager : IWeatherForecastService
     {
-        private readonly IUniversalWeatherForecastDbContext _dbContext;
+        //private readonly IUniversalWeatherForecastDbContext _dbContext;
         private readonly IWeatherForecastDal _dal;
         private readonly IMapper _mapper;
 
         public WeatherForecastManager(IUniversalWeatherForecastDbContext dbContext, IWeatherForecastDal dal, IMapper mapper)
         {
-            _dbContext = dbContext;
+            //_dbContext = dbContext;
             _dal = dal;
             _mapper = mapper;
         }
@@ -26,7 +26,8 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         public IQueryable<WeatherForecast> CreateQuery(WeatherForecastGetQueries filters)
         {
             // Sorgunun Hazırlanması - Başlangıç
-            var query = _dbContext.WeatherForecasts.AsQueryable();
+
+            var query = _dal.GetQuariable();
             if ((filters.EndDate > filters.StartDate) && (filters.EndDate != DateTime.MinValue))
             {
                 if      (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
@@ -51,7 +52,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         public ViewWeatherForecastDTO TGetById(int id)
         {
             // Verilerin alınması
-            var item = _dbContext.WeatherForecasts.Include(x => x.Body).Include(x => x.Type).SingleOrDefault(record => record.Id == id);
+            var item = _dal.GetByID(id);
             if (item is null)
                 throw new ArgumentNullException("Girilen ID'ye ait bir veri bulunmadı!");
             // Filtrelerin uygulanması
@@ -80,11 +81,12 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
         }
         
 
-        public void TInsert(CreateWeatherForecastDTO t)
+        public int TInsert(CreateWeatherForecastDTO t)
         {
 
-            WeatherForecast model = new();
+            var model = _mapper.Map<WeatherForecast>(t);
             _dal.Insert(model);
+            return model.Id;
         }
         /*
         public void TUpdate(WeatherForecast t)
