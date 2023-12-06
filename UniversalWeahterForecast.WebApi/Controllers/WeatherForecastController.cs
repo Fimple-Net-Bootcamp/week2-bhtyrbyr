@@ -1,5 +1,6 @@
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Expressions;
+using Newtonsoft.Json;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
 using UniversalWeahterForecast.BusinessLayer.Queries;
@@ -114,7 +115,7 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpPatch("{Id}")]
-        public IActionResult UpdateWithPatch(int Id, UpdateWeatherForecastDTO model)
+        public IActionResult UpdateWithPatch(int Id, JsonPatchDocument<WeatherForecast> model)
         {
             _service.TUpdate(Id, model);
             return Ok();

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
@@ -115,6 +116,14 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             item.BodyId = t.BodyId == default ? item.BodyId : t.BodyId;
             item.TypeId = t.TypeId == default ? item.TypeId : t.TypeId;
             item.Temprature = t.Temprature == default ? item.Temprature : t.Temprature;
+            _dal.Update(item);
+        }
+
+        public void TUpdate(int id, JsonPatchDocument<WeatherForecast> t)
+        {
+            var item = _dal.GetByID(id);
+            if (item is null) throw new Exception("Girilen ID'ye ait güncellenebilir bir veri bulunamadı!");
+            t.ApplyTo(item);
             _dal.Update(item);
         }
     }
