@@ -24,7 +24,7 @@ namespace UniversalWeahterForecast.WebApi.Mapping
                 );
             CreateMap<CreateCelestalBodyDTO, CelestalBody>()
                 .ForMember(
-                    dest => dest.IsPlanet, opt => opt.MapFrom(src => src.CelestalBodyType)
+                    dest => dest.IsPlanet, opt => opt.MapFrom(src => src.CelestalBodyType == "planet" ? true : false)
                 );
         }
     }

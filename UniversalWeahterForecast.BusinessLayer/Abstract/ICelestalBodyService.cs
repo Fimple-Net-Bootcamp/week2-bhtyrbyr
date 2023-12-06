@@ -14,7 +14,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Abstract
     {
         int TInsert(CreateCelestalBodyDTO t);
         void TDelete(int id);
-        void TUpdate(CelestalBody t);
+        void TUpdate(int id, UpdateCelestalBodyDTO model);
         List<ViewCelestalBodyDTO> TGetList(GetCelestalBodyQuery filter);
         ViewCelestalBodyDTO TGetByID(int id);
     }

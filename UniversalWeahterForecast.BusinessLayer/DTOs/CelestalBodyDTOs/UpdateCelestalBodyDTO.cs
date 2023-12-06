@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs
 {
-    internal class ViewPlanetDTO
+    public class UpdateCelestalBodyDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public List<CelestalBody> Satellites { get; set; }
+        public string CelestalBodyType  { get; set; }
+        public string AssociatedCelestalBody { get; set; }
     }
 }

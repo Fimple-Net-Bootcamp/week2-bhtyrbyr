@@ -71,5 +71,18 @@ namespace UniversalWeahterForecast.WebApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateWithDTO(int id, UpdateCelestalBodyDTO model)
+        {
+            try
+            {
+                _service.TUpdate(id, model);
+                return Ok();
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

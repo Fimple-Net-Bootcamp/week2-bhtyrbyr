@@ -5,6 +5,8 @@ using UniversalWeahterForecast.EntityLayer.Entitys;
 using UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs;
 using AutoMapper;
 using UniversalWeahterForecast.BusinessLayer.Queries;
+using UniversalWeahterForecast.BusinessLayer.DTOs.Validator.CelestalBodyValidator;
+using FluentValidation;
 
 namespace UniversalWeahterForecast.BusinessLayer.Concrete
 {
@@ -25,8 +27,8 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
 
             var query = _dal.GetQuariable();
 
-            if (string.Equals(filters.CelestalBodyType, "planet"))          query = query.Where(x => x.IsPlanet == true);
-            else if (string.Equals(filters.CelestalBodyType, "satellite"))  query = query.Where(x => x.IsPlanet == false);
+            if (string.Equals(filters.CelestalBodyType, "planet")) query = query.Where(x => x.IsPlanet == true);
+            else if (string.Equals(filters.CelestalBodyType, "satellite")) query = query.Where(x => x.IsPlanet == false);
 
             foreach (var item in filters.SortingCriterion)
             {
@@ -64,14 +66,24 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
 
         public int TInsert(CreateCelestalBodyDTO t)
         {
+            CreateCelestalBodyDTOValidator validator = new();
+            validator.ValidateAndThrow(t);
             var item = _mapper.Map<CelestalBody>(t);
             _dal.Insert(item);
             return item.Id;
         }
 
-        public void TUpdate(CelestalBody t)
+        public void TUpdate(int id, UpdateCelestalBodyDTO model)
         {
-            _dal.Update(t);
+            var item = _dal.GetByID(id);
+            if (item is null) throw new InvalidDataException("Girilen ID'ye ait kayıt bulunamadı!");
+            item.Name = model.Name == "string" ? item.Name : model.Name;
+            if      (model.CelestalBodyType == "planet")        
+                item.IsPlanet = true;
+            else if (model.CelestalBodyType == "satellite")     
+                item.IsPlanet = false;
+            item.WhoseSatellite = Convert.ToInt32(model.AssociatedCelestalBody);
+            _dal.Update(item);
         }
     }
 }
