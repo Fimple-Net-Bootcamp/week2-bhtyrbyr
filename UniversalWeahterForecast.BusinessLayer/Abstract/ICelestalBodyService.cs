@@ -12,7 +12,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Abstract
 {
     public interface ICelestalBodyService
     {
-        void TInsert(CelestalBody t);
+        int TInsert(CreateCelestalBodyDTO t);
         void TDelete(int id);
         void TUpdate(CelestalBody t);
         List<ViewCelestalBodyDTO> TGetList(GetCelestalBodyQuery filter);

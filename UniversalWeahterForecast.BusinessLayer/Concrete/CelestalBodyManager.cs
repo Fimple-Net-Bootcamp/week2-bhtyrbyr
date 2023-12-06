@@ -62,9 +62,11 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             return new List<ViewCelestalBodyDTO>(_mapper.Map<List<ViewCelestalBodyDTO>>(list));
         }
 
-        public void TInsert(CelestalBody t)
+        public int TInsert(CreateCelestalBodyDTO t)
         {
-            _dal.Insert(t);
+            var item = _mapper.Map<CelestalBody>(t);
+            _dal.Insert(item);
+            return item.Id;
         }
 
         public void TUpdate(CelestalBody t)
