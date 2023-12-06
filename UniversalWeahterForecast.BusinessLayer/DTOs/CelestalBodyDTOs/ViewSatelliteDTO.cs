@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UniversalWeahterForecast.BusinessLayer.DTOs.CelestalBodyDTOs
 {
-    internal class ViewCelestalBodyDTO
+    internal class ViewSatelliteDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

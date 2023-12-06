@@ -14,10 +14,20 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             _service = service;
         }
 
-        [HttpGet("")]
-        public IActionResult Get()
+        [HttpGet("Planets")]
+        public IActionResult GetPlanets()
         {
-            return Ok(_service.TGetList());
+            var list = _service.TGetList();
+            var planetList = list = list.Where(x => x.IsPlanet == true).ToList();
+            return Ok(planetList);
+        }
+
+        [HttpGet("Satellites")]
+        public IActionResult GetSatellites()
+        {
+            var list = _service.TGetList();
+            var satellitesList = list = list.Where(x => x.IsPlanet == false).ToList();
+            return Ok(satellitesList);
         }
     }
 }

@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Expressions;
 using UniversalWeahterForecast.BusinessLayer.Abstract;
 using UniversalWeahterForecast.BusinessLayer.DTOs.WeatherForecastDTOs;
 using UniversalWeahterForecast.BusinessLayer.Queries;
+using UniversalWeahterForecast.EntityLayer.Entitys;
 
 namespace UniversalWeahterForecast.WebApi.Controllers
 {
@@ -36,6 +38,27 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             try
             {
                 var values = _service.TGetById(Id);
+                return Ok(values);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{CelestalBodyType}/{id}")]
+        public IActionResult GetByCelestalBodyId(string CelestalBodyType, int id, [FromQuery] WeatherForecastGetQueries filters)
+        {
+            try
+            {
+                var values = new List<ViewWeatherForecastDTO>();
+                if (string.Equals(CelestalBodyType, "planet"))          
+                    values = _service.TGetListByCelestalBodyId(id, filters, true);
+                else if (string.Equals(CelestalBodyType, "Satellite"))  
+                    values = _service.TGetListByCelestalBodyId(id, filters, false);
+                else                                                    
+                    return BadRequest($"Girilen \"{CelestalBodyType + "/" + id}\" adres bulunamadý!");
                 return Ok(values);
             }
             catch (Exception ex)
@@ -82,7 +105,6 @@ namespace UniversalWeahterForecast.WebApi.Controllers
             {
                 _service.TUpdate(Id, model);
                 return Ok();
-                //return CreatedAtAction(nameof(GetById), new { id = modelId }, newModel);
             }
             catch (Exception ex)
             {

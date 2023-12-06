@@ -22,20 +22,20 @@ namespace UniversalWeahterForecast.DataAccessLayer.DBOperations
                 Random rnd = new();
 
                 context.CelestalBodies.AddRange(
-                        new CelestalBody { Name = "Celestria", 	    WhoseSatellite = 0}, //1 //1+
-                        new CelestalBody { Name = "Stellara",       WhoseSatellite = 0}, //2 //1
-                        new CelestalBody { Name = "Cosmirova", 	    WhoseSatellite = 0}, //3 //2+
-                        new CelestalBody { Name = "Galaxara", 		WhoseSatellite = 0}, //4 //2+
-                        new CelestalBody { Name = "Lunatria", 		WhoseSatellite = 0}, //5 //1
-                        new CelestalBody { Name = "Nebulonia",      WhoseSatellite = 0}, //6 //1
-                        new CelestalBody { Name = "Astrionyx",  	WhoseSatellite = 1},
-                        new CelestalBody { Name = "Galactrix",  	WhoseSatellite = 4},
-                        new CelestalBody { Name = "Quasarion", 	    WhoseSatellite = 3},
-                        new CelestalBody { Name = "Novaflare", 	    WhoseSatellite = 2},
-                        new CelestalBody { Name = "Astrolynx", 	    WhoseSatellite = 4},
-                        new CelestalBody { Name = "Orionex", 		WhoseSatellite = 3},
-                        new CelestalBody { Name = "Astralspire", 	WhoseSatellite = 5},
-                        new CelestalBody { Name = "Nebulique", 	    WhoseSatellite = 6}
+                        new CelestalBody { Name = "Celestria", 	    IsPlanet = true,    WhoseSatellite = 0}, //1 //1+
+                        new CelestalBody { Name = "Stellara",       IsPlanet = true,    WhoseSatellite = 0}, //2 //1
+                        new CelestalBody { Name = "Cosmirova", 	    IsPlanet = true,    WhoseSatellite = 0}, //3 //2+
+                        new CelestalBody { Name = "Galaxara", 		IsPlanet = true,    WhoseSatellite = 0}, //4 //2+
+                        new CelestalBody { Name = "Lunatria", 		IsPlanet = true,    WhoseSatellite = 0}, //5 //1
+                        new CelestalBody { Name = "Nebulonia",      IsPlanet = true,    WhoseSatellite = 0}, //6 //1
+                        new CelestalBody { Name = "Astrionyx",  	IsPlanet = false,   WhoseSatellite = 1},
+                        new CelestalBody { Name = "Galactrix",  	IsPlanet = false,   WhoseSatellite = 4},
+                        new CelestalBody { Name = "Quasarion", 	    IsPlanet = false,   WhoseSatellite = 3},
+                        new CelestalBody { Name = "Novaflare", 	    IsPlanet = false,   WhoseSatellite = 2},
+                        new CelestalBody { Name = "Astrolynx", 	    IsPlanet = false,   WhoseSatellite = 4},
+                        new CelestalBody { Name = "Orionex", 		IsPlanet = false,   WhoseSatellite = 3},
+                        new CelestalBody { Name = "Astralspire", 	IsPlanet = false,   WhoseSatellite = 5},
+                        new CelestalBody { Name = "Nebulique", 	    IsPlanet = false,   WhoseSatellite = 6}
                     );
 
                 context.WeatherTypes.AddRange(
