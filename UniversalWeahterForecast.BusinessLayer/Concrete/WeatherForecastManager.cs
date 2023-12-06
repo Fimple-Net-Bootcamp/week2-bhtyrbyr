@@ -26,7 +26,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             _mapper = mapper;
         }
 
-        public IQueryable<WeatherForecast> CreateQuery(WeatherForecastGetQueries filters)
+        private IQueryable<WeatherForecast> CreateQuery(GetWeatherForeceastListQuery filters)
         {
             // Sorgunun Hazırlanması - Başlangıç
 
@@ -51,8 +51,35 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             }
             return query = query.Where(x => !filters.DelistingIds.Contains(x.BodyId));
         }
-        
-        public List<ViewWeatherForecastDTO> TGetList(WeatherForecastGetQueries filters)
+
+        private IQueryable<WeatherForecast> CreateQuery(GetWeatherForecastListQueryByCelestalBody filters)
+        {
+            // Sorgunun Hazırlanması - Başlangıç
+
+            var query = _dal.GetQuariable();
+            if ((filters.EndDate > filters.StartDate) && (filters.EndDate != DateTime.MinValue))
+            {
+                if (filters.StartDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime >= filters.StartDate);
+                if (filters.EndDate != DateTime.MinValue) query = query.Where(record => record.WeatherTime <= filters.EndDate);
+            }
+
+            foreach (var item in filters.Sort)
+            {
+                List<string> sortDirection = item.Split(',').ToList();
+                if (sortDirection[1] == "asc")
+                {
+                    query = query.OrderBy(sortDirection[0]);
+                }
+                else if (sortDirection[1] == "desc")
+                {
+                    query = query.OrderBy(sortDirection[0] + " descending");
+                }
+            }
+
+            return query;
+        }
+
+        public List<ViewWeatherForecastDTO> TGetList(GetWeatherForeceastListQuery filters)
         {
             // Sorgunun Hazırlanması 
             var query = CreateQuery(filters);
@@ -65,7 +92,7 @@ namespace UniversalWeahterForecast.BusinessLayer.Concrete
             return olist;
         }
 
-        public List<ViewWeatherForecastDTO> TGetListByCelestalBodyId(int id, WeatherForecastGetQueries filters)
+        public List<ViewWeatherForecastDTO> TGetListByCelestalBodyId(int id, GetWeatherForecastListQueryByCelestalBody filters)
         {
             // Sorgunun Hazırlanması 
             var query = CreateQuery(filters);

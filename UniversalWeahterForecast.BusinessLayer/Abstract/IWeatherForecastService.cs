@@ -11,8 +11,8 @@ namespace UniversalWeahterForecast.BusinessLayer.Abstract
         void TDelete(int id);
         void TUpdate(int id, UpdateWeatherForecastDTO t);
         void TUpdate(int id, JsonPatchDocument<WeatherForecast> t);
-        List<ViewWeatherForecastDTO> TGetList(WeatherForecastGetQueries filters);
-        List<ViewWeatherForecastDTO> TGetListByCelestalBodyId(int id, WeatherForecastGetQueries filters);
+        List<ViewWeatherForecastDTO> TGetList(GetWeatherForeceastListQuery filters);
+        List<ViewWeatherForecastDTO> TGetListByCelestalBodyId(int id, GetWeatherForecastListQueryByCelestalBody filters);
         ViewWeatherForecastDTO TGetById(int id);
     }
 }

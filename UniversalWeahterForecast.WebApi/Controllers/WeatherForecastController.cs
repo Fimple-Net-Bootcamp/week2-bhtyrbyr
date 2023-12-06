@@ -19,7 +19,7 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpGet("")]
-        public IActionResult Get([FromQuery] WeatherForecastGetQueries filters)
+        public IActionResult Get([FromQuery] GetWeatherForeceastListQuery filters)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         }
 
         [HttpGet("CelestalBodies/{id}")]
-        public IActionResult GetByCelestalBodyId(int id, [FromQuery] WeatherForecastGetQueries filters)
+        public IActionResult GetByCelestalBodyId(int id, [FromQuery] GetWeatherForecastListQueryByCelestalBody filters)
         {
             try
             {
@@ -111,8 +111,16 @@ namespace UniversalWeahterForecast.WebApi.Controllers
         [HttpPatch("{Id}")]
         public IActionResult UpdateWithPatch(int Id, JsonPatchDocument<WeatherForecast> model)
         {
-            _service.TUpdate(Id, model);
-            return Ok();
+            try
+            {
+                _service.TUpdate(Id, model);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

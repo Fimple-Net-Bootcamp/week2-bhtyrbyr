@@ -1,8 +1,8 @@
 ﻿namespace UniversalWeahterForecast.BusinessLayer.Queries
 {
-    public class WeatherForecastGetQueries
+    public class GetWeatherForeceastListQuery
     {
-        public WeatherForecastGetQueries()
+        public GetWeatherForeceastListQuery()
         {
             Sort = new();
             DelistingIds = new();
